@@ -5,19 +5,17 @@ f.close()
 RT = {}
 AT = {}
 
+#check every tweets
 for i in range(len(content)):
     text = content[i].split(",")[3][7:]
     userID = content[i].split(",")[1][5:]
-    #print (text)
-    #print ("This is iiiiiii",i)
-    for j in range(len(text)):
-        #print("emmmmmmm, so.. what's j??", j)
+    for j in range(len(text)):          #indexing the text of each tweet
         if text[j] == '@':
-            #print ("Where it happen???",text[j+1])
             k = 0
+            #check if it's retweet or quote and make sure the index will not be out of range
             while (text[j+k] != " " or text[j+k] != ":") and (j!=len(text)-1 and j+k <len(text)-1):
                 userName = text[j:j+k]
-                #print ("The user name", userName)
+                #quote will always followed by blank space
                 if text[j+k] == " " or j==len(text)-1:
                     if userID in AT.keys():
                         if userName in AT[userID].keys():
@@ -26,10 +24,9 @@ for i in range(len(content)):
                             AT[userID][userName] = 1
                     else:
                         AT[userID] = {userName:1}
-                    #print (AT)
                     break
+                #retweet will always followed by a ":"
                 elif text[j+k] == ":":
-                    #print("have you been here?")
                     if userID in RT.keys():
                         if userName in RT[userID].keys():
                             RT[userID][userName] = RT[userID][userName] + 1
@@ -37,15 +34,9 @@ for i in range(len(content)):
                             RT[userID][userName] = 1
                     else:
                         RT[userID] = {userName:1}
-                    #print (RT)
                     break
                 k = k + 1
-                #print (k)
-                
-                
-
-#print (RT)
-#print (AT)
+#output the file
 f0 = open("RT.txt", "w")
 f1 = open("AT.txt", "w")
 
