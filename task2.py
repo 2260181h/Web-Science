@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 #3k1 is the source file
-f = open("3k1.json", "r")
+f = open("3k3.json", "r")
 content = f.readlines()
 f.close()
 
