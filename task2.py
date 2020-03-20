@@ -5,12 +5,13 @@ from sklearn.datasets import make_blobs
 import matplotlib.pyplot as plt
 import numpy as np
 
+#3k1 is the source file
 f = open("3k1.json", "r")
 content = f.readlines()
 f.close()
 
+#get text from tweets
 l = []
-
 for i in range(len(content)):
     k = content[i].split(",")
     l.append(k[3][7:])
@@ -20,6 +21,7 @@ vectorizer = TfidfVectorizer()
 vectorizer.fit(l)
 vector = vectorizer.transform([l[0]])
 
+#reshape the vector to 2d
 if len(vectorizer.idf_) % 2 == 1:
     a = vectorizer.idf_[:-1]
 else:
